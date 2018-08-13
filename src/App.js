@@ -16,12 +16,13 @@ class App extends Component {
         'Content-Type': 'application/json'
       }
     }
-  )
-  .then(function(response) {
+  ).then(function(response) {
+    debugger;
     return response.json();
-  })
-  .then(function(myJson) {
-    console.log(myJson);
+  }).then(function (myJson) {
+          console.log(myJson);
+          this.setState({ result: JSON.parse(myJson) });
+          debugger;
   });
 
     return (
