@@ -9,20 +9,22 @@ class App extends Component {
   render() {
   fetch(
     'https://thewirecutter.com/wp-json/wp/v2/posts',
-    {
-      method: 'GET',
-      mode:'no-cors',
-      headers:{
-        'Content-Type': 'application/json'
-      }
-    }
-  ).then(function(response) {
-    debugger;
-    return response.json();
-  }).then(function (myJson) {
-          console.log(myJson);
-          this.setState({ result: JSON.parse(myJson) });
+      {
+          method: "GET",
+          mode: "cors",
+          cache: "no-cache",
+          credentials: "same-origin",
+          headers: {
+              "Content-Type": "application/json; charset=utf-8",
+              "access-control - allow - headers": 'http://localhost:3000'
+          },
+          redirect: "follow",
+          referrer: "no-referrer"
+      }  ).then(res => res.json()).catch(error => console.error('Error==>', error))
+      .then(function (myJson) {
           debugger;
+          console.log('myJson=' + myJson);
+          //this.setState({ result: JSON.parse(myJson || '') });
   });
 
     return (
