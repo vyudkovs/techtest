@@ -4,33 +4,36 @@ import './App.css';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { result: {} };
+    this.state = { result: { 'empty': true } };
+    this.print = this.print.bind(this);
+    }
+  print= (result) => {
+      console.log('json=' + JSON.stringify(result));
+      this.setState({ 'result': JSON.stringify(result) });
   }
   render() {
-  fetch(
-    'https://thewirecutter.com/wp-json/wp/v2/posts',
-      {
-          method: "GET",
-          mode: "cors",
-          cache: "no-cache",
-          credentials: "same-origin",
-          headers: {
-              "Content-Type": "application/json; charset=utf-8",
-              "access-control - allow - headers": 'http://localhost:3000'
-          },
-          redirect: "follow",
-          referrer: "no-referrer"
-      }  ).then(res => res.json()).catch(error => console.error('Error==>', error))
-      .then(function (myJson) {
-          debugger;
-          console.log('myJson=' + myJson);
-          //this.setState({ result: JSON.parse(myJson || '') });
-  });
+    fetch('https://thewirecutter.com/wp-json/wp/v2/posts', {
+        method: 'get',
+        headers: {
+            "Content-type": "application/json; charset=UTF-8",
+        },
+        mode: "cors"
+    })
+    .then(
+        res => {
+            return res.json();
+        })
+    .catch(
+        error => {
+            console.error('Error==>', error)
+        })
+
+    .then(this.print);
 
     return (
-      <div className="App">
-        {JSON.stringify(this.state.result)}
-      </div>
+        <div className="App">
+            {JSON.stringify(this.state.result)}
+        </div>
     );
   }
 }

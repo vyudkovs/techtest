@@ -1,10 +1,6 @@
 {
   "root": true,
-  "extends": [
-    "eslint:airbnb",
-    "plugin:import/errors",
-    "plugin:import/warnings"
-  ],
+  "extends": "airbnb",
   "parserOptions": {
     "ecmaVersion": 7,
     "sourceType": "module"
